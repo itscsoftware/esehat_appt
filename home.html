@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eSEhat Appointment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+          html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            background-color: #f4f9ff;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        footer {
+            background-color: #007bff;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            text-align: left;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .carousel-caption h3,
+        .carousel-caption p {
+            color: white;
+            margin: 0;
+        }
+
+        /* 🔧 Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .carousel-item img {
+                height: 250px;
+            }
+
+            .carousel-caption {
+                top: auto;
+                bottom: 20px;
+                left: 5%;
+                right: 5%;
+                transform: none;
+                padding: 10px;
+            }
+
+            .carousel-caption h3 {
+                font-size: 1.2rem;
+            }
+
+            .carousel-caption p {
+                font-size: 0.9rem;
+            }
+
+            .more-info {
+                padding: 15px;
+                background-color: #e9f7fc;
+                border-radius: 8px;
+                text-align: center;
+            }
+
+            .more-info h2 {
+                font-size: 1.4rem;
+                margin-bottom: 10px;
+            }
+
+            .more-info p {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .more-info {
+                padding: 30px;
+                background-color: #e9f7fc;
+                border-radius: 8px;
+            }
+
+            .more-info h2 {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+
+            .more-info p {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+        }
+
+         /* Styling for the token display */
+         .token-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .counter {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            width: 18%;
+        }
+
+        .counter span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Table styling */
+        .token-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+
+        .token-table th,
+        .token-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .token-table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .token-table td {
+            background-color: #f7f7f7;
+        }
+
+        .token-row {
+            font-size: 1.2rem;
+        }
+
+        /* Make it responsive */
+        @media (max-width: 768px) {
+            .token-table th,
+            .token-table td {
+                font-size: 1rem;
+            }
+
+            .counter {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">eSehat</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#" onclick="showHome()">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showNewAppointment()">New Appointment</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showMyAppointments()">My Appointments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showOperatorSection()">Hospital Operator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showHospitalTV()">Hospital TV</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        <!-- Home Section -->
+          <!-- Home Section -->
+          <div id="homeSection">
+            <div id="carouselExampleControls" class="carousel slide mb-4" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://kanerika.com/wp-content/uploads/2024/07/doctor-studying-genetic-disease-dna-research-with-laptop-neoteric.jpg.webp"
+                            class="d-block w-100" alt="Slide 1" />
+                        <div class="carousel-caption">
+                            <h3>Advanced Medical Care</h3>
+                            <p>Technology-enabled treatment solutions</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://kanerika.com/wp-content/uploads/2024/07/doctor-studying-genetic-disease-dna-research-with-laptop-neoteric.jpg.webp"
+                            class="d-block w-100" alt="Slide 2" />
+                        <div class="carousel-caption">
+                            <h3>Expert Doctors</h3>
+                            <p>Compassionate and experienced team</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://kanerika.com/wp-content/uploads/2024/07/doctor-studying-genetic-disease-dna-research-with-laptop-neoteric.jpg.webp"
+                            class="d-block w-100" alt="Slide 3" />
+                        <div class="carousel-caption">
+                            <h3>Quick Appointments</h3>
+                            <p>Book your consultation easily</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+
+            <!-- More Info Section Below the Slider -->
+            <div class="more-info">
+                <h2>Welcome to eSehat - Your Trusted Healthcare Partner</h2>
+                <p>
+                    At eSehat, we bring advanced medical care right to your fingertips. Our user-friendly platform allows you
+                    to book appointments with expert doctors, access a variety of medical services, and receive the best
+                    care tailored to your needs.
+                </p>
+                <p>
+                    With cutting-edge technology and a compassionate team of healthcare professionals, we are committed to
+                    providing the best healthcare experience. Whether you need a quick consultation or ongoing treatment,
+                    we are here for you.
+                </p>
+            </div>
+        </div>
+
+        <!-- New Appointment Section -->
+        <div id="newAppointmentSection" style="display: none;">
+            <h2 class="text-center mb-4">🩺 Book New Appointment</h2>
+
+            <div class="step active" id="step1">
+                <label for="mobile" class="form-label">Enter Mobile Number</label>
+                <input type="text" class="form-control mb-3" id="mobile" placeholder="Enter 10-digit mobile number">
+                <button class="btn btn-primary" onclick="checkMobile()">Next</button>
+            </div>
+
+            <div class="step" id="step2a">
+                <h5>Select Existing Patient</h5>
+                <div id="patientList" class="list-group mb-3"></div>
+                <button class="btn btn-secondary" onclick="goToCalendar()">Next</button>
+            </div>
+
+            <div class="step" id="step2b">
+                <h5>New Patient Registration</h5>
+                <input type="text" class="form-control mb-2" placeholder="Full Name">
+                <input type="number" class="form-control mb-2" placeholder="Age">
+                <select class="form-control mb-3">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+                <button class="btn btn-secondary" onclick="goToCalendar()">Next</button>
+            </div>
+
+            <div class="step" id="step3">
+                <h5>Select Appointment Date</h5>
+                <input type="date" class="form-control mb-3" id="appointmentDate">
+                <button class="btn btn-success" onclick="submitAppointment()">Submit</button>
+            </div>
+
+            <div class="step" id="step4">
+                <h4 class="text-success">🎉 Appointment Confirmed</h4>
+                <p>Your token number is: <strong id="tokenNumber">#123</strong></p>
+            </div>
+        </div>
+
+        <!-- My Appointments Section -->
+        <div id="myAppointmentsSection" style="display: none;">
+            <h2 class="text-center mb-4">📅 My Appointments</h2>
+            <input type="text" class="form-control mb-2" id="searchMobile" placeholder="Enter 10-digit mobile number">
+            <button class="btn btn-primary mb-3" onclick="fetchAppointments()">Search</button>
+
+            <div id="appointmentResults" style="display: none;">
+                <h5>Appointments for <span id="mobileHeader"></span>:</h5>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Date</th>
+                            <th>Token</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointmentsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Hospital Operator Section -->
+        <div id="operatorSection" style="display: none;">
+            <h2 class="text-center mb-4">🏥 Hospital Operator: Today's Appointments</h2>
+            <input type="date" class="form-control mb-3" id="operatorDate" onchange="searchTodaysAppointments()">
+            <button class="btn btn-primary mb-3" onclick="searchTodaysAppointments()">Search Today's Appointments</button>
+
+            <div id="operatorResults" style="display: none;">
+                <h5>Today's Appointments:</h5>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Token</th>
+                            <th>Register</th>
+                        </tr>
+                    </thead>
+                    <tbody id="operatorAppointmentsTable"></tbody>
+                </table>
+            </div>
+        </div>
+         <!-- Hospital TV Section -->
+         <div id="hospitalTVSection" style="display: none;">
+            <div class="token-display">
+                <!-- <div class="counter">
+                    <span>Token: A123</span><br>
+                    Counter 1
+                </div>
+                <div class="counter">
+                    <span>Token: B101</span><br>
+                    Counter 2
+                </div>
+                <div class="counter">
+                    <span>Token: C210</span><br>
+                    Counter 3
+                </div>
+                <div class="counter">
+                    <span>Token: D302</span><br>
+                    Counter 4
+                </div>
+                <div class="counter">
+                    <span>Token: E400</span><br>
+                    Counter 5
+                </div>
+            </div> -->
+
+            <table class="token-table">
+                <thead>
+                    <tr>
+                        <th>Counter 1</th>
+                        <th>Counter 2</th>
+                        <th>Counter 3</th>
+                        <th>Counter 4</th>
+                        <th>Counter 5</th>
+                    </tr>
+                </thead>
+                <tbody id="hospitalTVBody">
+                    <!-- Token rows will be inserted here dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="text-center py-3">
+        <small>&copy; 2025 All rights reserved.</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showHome() {
+            hideAllSections();
+            document.getElementById('homeSection').style.display = 'block';
+        }
+
+        function showNewAppointment() {
+            hideAllSections();
+            document.getElementById('newAppointmentSection').style.display = 'block';
+            showStep('step1');
+        }
+
+        function showMyAppointments() {
+            hideAllSections();
+            document.getElementById('myAppointmentsSection').style.display = 'block';
+            document.getElementById('appointmentResults').style.display = 'none';
+            document.getElementById('searchMobile').value = '';
+        }
+
+        function showOperatorSection() {
+            hideAllSections();
+            document.getElementById('operatorSection').style.display = 'block';
+        }
+
+        function showHospitalTV() {
+            hideAllSections();
+            document.getElementById('hospitalTVSection').style.display = 'block';
+            updateTokenList();
+        }
+
+        function hideAllSections() {
+            document.getElementById('homeSection').style.display = 'none';
+            document.getElementById('newAppointmentSection').style.display = 'none';
+            document.getElementById('myAppointmentsSection').style.display = 'none';
+            document.getElementById('operatorSection').style.display = 'none';
+            document.getElementById('hospitalTVSection').style.display = 'none';
+        }
+
+        function showStep(stepId) {
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            document.getElementById(stepId).classList.add('active');
+        }
+
+        function checkMobile() {
+            const mobile = document.getElementById('mobile').value;
+            if (mobile === '9999999999') {
+                loadExistingPatients();
+                showStep('step2a');
+            } else {
+                showStep('step2b');
+            }
+        }
+
+        function loadExistingPatients() {
+            const patientList = document.getElementById('patientList');
+            patientList.innerHTML = '';
+            ['John Doe', 'Jane Doe'].forEach(name => {
+                const btn = document.createElement('button');
+                btn.className = 'list-group-item list-group-item-action';
+                btn.textContent = name;
+                btn.onclick = () => alert(name + ' selected');
+                patientList.appendChild(btn);
+            });
+        }
+
+        function goToCalendar() {
+            showStep('step3');
+        }
+
+        function submitAppointment() {
+            const token = Math.floor(100 + Math.random() * 900);
+            document.getElementById('tokenNumber').textContent = '#' + token;
+            showStep('step4');
+        }
+
+        function fetchAppointments() {
+            const mobile = document.getElementById('searchMobile').value;
+            const resultDiv = document.getElementById('appointmentResults');
+            const tableBody = document.getElementById('appointmentsTableBody');
+            const mobileHeader = document.getElementById('mobileHeader');
+
+            tableBody.innerHTML = '';
+            mobileHeader.textContent = mobile;
+            resultDiv.style.display = 'block';
+
+            // Dummy data
+            const appointments = [
+                { name: 'John Doe', age: 45, gender: 'Male', date: '2025-05-10', token: '#123' },
+                { name: 'Jane Doe', age: 35, gender: 'Female', date: '2025-05-12', token: '#456' },
+                { name: 'Baby Doe', age: 3, gender: 'Other', date: '2025-05-15', token: '#789' }
+            ];
+
+            appointments.forEach(appt => {
+                const row = `<tr>
+                    <td>${appt.name}</td>
+                    <td>${appt.age}</td>
+                    <td>${appt.gender}</td>
+                    <td>${appt.date}</td>
+                    <td>${appt.token}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function searchTodaysAppointments() {
+            const date = document.getElementById('operatorDate').value;
+            const resultDiv = document.getElementById('operatorResults');
+            const tableBody = document.getElementById('operatorAppointmentsTable');
+
+            tableBody.innerHTML = '';
+            resultDiv.style.display = 'block';
+
+            // Placeholder: Replace with API call or HMIS integration
+            const appointments = [
+                { name: 'John Doe', age: 30, gender: 'Male', token: '1234' },
+                { name: 'Jane Smith', age: 45, gender: 'Female', token: '1235' }
+            ];
+
+            appointments.forEach(appointment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${appointment.name}</td>
+                    <td>${appointment.age}</td>
+                    <td>${appointment.gender}</td>
+                    <td>${appointment.token}</td>
+                    <td><button class="btn btn-success">Register</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+          // Data for hospital counters (each counter has its own list of tokens)
+          const countersData = {
+            "counter1": [
+                { token: "A123" },
+                { token: "A124" },
+                { token: "A125" },
+                { token: "A126" },
+                { token: "A127" }
+            ],
+            "counter2": [
+                { token: "B101" },
+                { token: "B102" },
+                { token: "B103" },
+                { token: "B104" },
+                { token: "B105" }
+            ],
+            "counter3": [
+                { token: "C210" },
+                { token: "C211" },
+                { token: "C212" },
+                { token: "C213" },
+                { token: "C214" }
+            ],
+            "counter4": [
+                { token: "D302" },
+                { token: "D303" },
+                { token: "D304" },
+                { token: "D305" },
+                { token: "D306" }
+            ],
+            "counter5": [
+                { token: "E400" },
+                { token: "E401" },
+                { token: "E402" },
+                { token: "E403" },
+                { token: "E404" }
+            ]
+        };
+        
+        // Function to update the token list in a single table
+        function updateTokenList() {
+            const tbody = document.getElementById("hospitalTVBody");
+            tbody.innerHTML = '';  // Clear existing content
+
+            // Get the maximum number of tokens per counter to loop over
+            const maxTokens = Math.max(
+                countersData.counter1.length,
+                countersData.counter2.length,
+                countersData.counter3.length,
+                countersData.counter4.length,
+                countersData.counter5.length
+            );
+
+            for (let i = 0; i < maxTokens; i++) {
+                const row = document.createElement('tr');
+
+                // Add token for each counter (or empty if not available)
+                for (let j = 1; j <= 5; j++) {
+                    const counterId = `counter${j}`;
+                    const token = countersData[counterId][i] ? countersData[counterId][i].token : '';
+                    const cell = document.createElement('td');
+                    cell.classList.add('token-row');
+                    cell.textContent = token;
+                    row.appendChild(cell);
+                }
+
+                tbody.appendChild(row);
+            }
+        }
+
+        // Periodic update of the token list (every 5 seconds)
+        setInterval(updateTokenList, 5000);
+    </script>
+</body>
+
+</html>

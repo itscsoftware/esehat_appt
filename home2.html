@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediCare Appointment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            background-color: #f4f9ff;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        footer {
+            background-color: #007bff;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        /* Styling for the token display */
+        .token-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .counter {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            width: 18%;
+        }
+
+        .counter span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Table styling */
+        .token-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+
+        .token-table th,
+        .token-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .token-table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .token-table td {
+            background-color: #f7f7f7;
+        }
+
+        .token-row {
+            font-size: 1.2rem;
+        }
+
+        /* Make it responsive */
+        @media (max-width: 768px) {
+            .token-table th,
+            .token-table td {
+                font-size: 1rem;
+            }
+
+            .counter {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">eSehat</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#" onclick="showHome()">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showNewAppointment()">New Appointment</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showMyAppointments()">My Appointments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showHospitalTV()">Hospital TV</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        <!-- Home Section -->
+        <div id="homeSection">
+            <div id="carouselExampleControls" class="carousel slide mb-4" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://kanerika.com/wp-content/uploads/2024/07/doctor-studying-genetic-disease-dna-research-with-laptop-neoteric.jpg.webp"
+                            class="d-block w-100" alt="Slide 1" />
+                        <div class="carousel-caption">
+                            <h3>Advanced Medical Care</h3>
+                            <p>Technology-enabled treatment solutions</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://kanerika.com/wp-content/uploads/2024/07/doctor-studying-genetic-disease-dna-research-with-laptop-neoteric.jpg.webp"
+                            class="d-block w-100" alt="Slide 2" />
+                        <div class="carousel-caption">
+                            <h3>Expert Doctors</h3>
+                            <p>Compassionate and experienced team</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://kanerika.com/wp-content/uploads/2024/07/doctor-studying-genetic-disease-dna-research-with-laptop-neoteric.jpg.webp"
+                            class="d-block w-100" alt="Slide 3" />
+                        <div class="carousel-caption">
+                            <h3>Quick Appointments</h3>
+                            <p>Book your consultation easily</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Hospital TV Section -->
+        <div id="hospitalTVSection" style="display: none;">
+            <!-- <div class="token-display">
+                <div class="counter">
+                    <span>Token: A123</span><br>
+                    Counter 1
+                </div>
+                <div class="counter">
+                    <span>Token: B101</span><br>
+                    Counter 2
+                </div>
+                <div class="counter">
+                    <span>Token: C210</span><br>
+                    Counter 3
+                </div>
+                <div class="counter">
+                    <span>Token: D302</span><br>
+                    Counter 4
+                </div>
+                <div class="counter">
+                    <span>Token: E400</span><br>
+                    Counter 5
+                </div>
+            </div> -->
+
+            <table class="token-table">
+                <thead>
+                    <tr>
+                        <th>Counter 1</th>
+                        <th>Counter 2</th>
+                        <th>Counter 3</th>
+                        <th>Counter 4</th>
+                        <th>Counter 5</th>
+                    </tr>
+                </thead>
+                <tbody id="hospitalTVBody">
+                    <!-- Token rows will be inserted here dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <footer class="text-center py-3">
+        <small>&copy; 2025. All rights reserved.</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Data for hospital counters (each counter has its own list of tokens)
+        const countersData = {
+            "counter1": [
+                { token: "A123" },
+                { token: "A124" },
+                { token: "A125" },
+                { token: "A126" },
+                { token: "A127" }
+            ],
+            "counter2": [
+                { token: "B101" },
+                { token: "B102" },
+                { token: "B103" },
+                { token: "B104" },
+                { token: "B105" }
+            ],
+            "counter3": [
+                { token: "C210" },
+                { token: "C211" },
+                { token: "C212" },
+                { token: "C213" },
+                { token: "C214" }
+            ],
+            "counter4": [
+                { token: "D302" },
+                { token: "D303" },
+                { token: "D304" },
+                { token: "D305" },
+                { token: "D306" }
+            ],
+            "counter5": [
+                { token: "E400" },
+                { token: "E401" },
+                { token: "E402" },
+                { token: "E403" },
+                { token: "E404" }
+            ]
+        };
+
+        // Function to show the Hospital TV screen
+        function showHospitalTV() {
+            hideAllSections();
+            document.getElementById('hospitalTVSection').style.display = 'block';
+            updateTokenList();
+        }
+
+        // Hide all sections
+        function hideAllSections() {
+            document.getElementById('homeSection').style.display = 'none';
+            document.getElementById('hospitalTVSection').style.display = 'none';
+        }
+
+        // Function to update the token list in a single table
+        function updateTokenList() {
+            const tbody = document.getElementById("hospitalTVBody");
+            tbody.innerHTML = '';  // Clear existing content
+
+            // Get the maximum number of tokens per counter to loop over
+            const maxTokens = Math.max(
+                countersData.counter1.length,
+                countersData.counter2.length,
+                countersData.counter3.length,
+                countersData.counter4.length,
+                countersData.counter5.length
+            );
+
+            for (let i = 0; i < maxTokens; i++) {
+                const row = document.createElement('tr');
+
+                // Add token for each counter (or empty if not available)
+                for (let j = 1; j <= 5; j++) {
+                    const counterId = `counter${j}`;
+                    const token = countersData[counterId][i] ? countersData[counterId][i].token : '';
+                    const cell = document.createElement('td');
+                    cell.classList.add('token-row');
+                    cell.textContent = token;
+                    row.appendChild(cell);
+                }
+
+                tbody.appendChild(row);
+            }
+        }
+
+        // Periodic update of the token list (every 5 seconds)
+        setInterval(updateTokenList, 5000);
+    </script>
+</body>
+
+</html>
